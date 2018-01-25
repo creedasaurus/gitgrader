@@ -1,0 +1,18 @@
+version: "3.3"
+services:
+  backend:
+    build: .
+    volumes:
+      - graderfiles:/test
+
+  static:
+    image: nginx:1.13.5-alpine
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+
+volumes:
+  graderfiles:
+    external: true
